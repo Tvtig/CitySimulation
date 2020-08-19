@@ -1,0 +1,41 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1597475290",
+        "python_version": "3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:57:54) [MSC v.1924 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\Program Files\\Python\\Scripts\\mlagents-learn config/CarAgent.yaml --run-id=CarAgent --resume",
+        "mlagents_version": "0.18.1",
+        "mlagents_envs_version": "0.18.1",
+        "communication_protocol_version": "1.0.0",
+        "tensorflow_version": "2.3.0",
+        "end_time_seconds": "1597475300"
+    },
+    "total": 9.8531728,
+    "count": 1,
+    "self": 0.2657410999999996,
+    "children": {
+        "run_training.setup": {
+            "total": 0.02259299999999964,
+            "count": 1,
+            "self": 0.02259299999999964
+        },
+        "TrainerController.start_learning": {
+            "total": 9.5648387,
+            "count": 1,
+            "self": 2.377646199999999,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 7.186875799999999,
+                    "count": 1,
+                    "self": 7.186875799999999
+                },
+                "TrainerController._save_model": {
+                    "total": 0.00031670000000083576,
+                    "count": 1,
+                    "self": 0.00031670000000083576
+                }
+            }
+        }
+    }
+}

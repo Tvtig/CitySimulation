@@ -20,8 +20,6 @@ public class DriverController : Agent
     private float _maxMotorTorque = 800;
     [SerializeField]
     private float _maxSteeringAngle = 30;
-    [SerializeField]
-    private GameObject _trainingArea = null;
 
     public float LocalVelocity;
     public float Horizontal;

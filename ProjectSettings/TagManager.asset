@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - GoodRoad
   - Boundary
+  - GroundTile
   layers:
   - Default
   - TransparentFX

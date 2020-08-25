@@ -24,5 +24,4 @@ public class SceneController : MonoBehaviour
             _vehicleOverheadCamera.enabled = !_vehicleOverheadCamera.enabled;                
         }       
     }
-
 }

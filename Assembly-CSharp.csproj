@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{D12963C8-B2C5-EB2A-C4E7-0F867C11D3CC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -58,9 +57,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\SceneController.cs" />
     <Compile Include="Assets\Scripts\Vehicle\AxleInfo.cs" />
+    <Compile Include="Assets\Scripts\CityEditor\BuildingElement.cs" />
     <Compile Include="Assets\Scripts\CityEditor\GroundManager.cs" />
     <Compile Include="Assets\Scripts\Vehicle\DriverController.cs" />
-    <Compile Include="Assets\Scripts\CityEditor\BuildingElement.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -680,7 +680,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

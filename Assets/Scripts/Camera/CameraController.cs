@@ -18,79 +18,113 @@ public class CameraController : MonoBehaviour
     private float _minY = 20f;
     [SerializeField]
     private float _maxY = 200f;
+    [SerializeField]
+    private bool _panningEnabled = false;
     
     private float _dragSpeed;
     private Vector3 _dragOrigin = Vector3.zero;
     private bool _isDragging = false;
     private float _scrollPosition = 0f;
+    private Vector3 _initialPosition;
 
     private void Start()
     {
+        _initialPosition = transform.position;
         _dragSpeed = _panSpeed * 4;
         _scrollSpeed *= 5000;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        Vector3 position = Vector3.zero;
-
-        if (Input.GetMouseButtonUp(2))
+        //Reset Camera
+        if(Input.GetKey(KeyCode.R))
         {
-            _isDragging = false;
+            transform.position = _initialPosition;
         }
 
-        if (Input.GetMouseButtonDown(2))
+        if (_panningEnabled)
         {
-            _dragOrigin = Input.mousePosition;
-            _isDragging = true;
-            return;
-        }
-        else if (_isDragging)
-        {
-            Vector3 mousePositionWithDragOffset = Camera.main.ScreenToViewportPoint(Input.mousePosition - _dragOrigin);
-            position = new Vector3(-mousePositionWithDragOffset.x * _dragSpeed, 0, -mousePositionWithDragOffset.y * _dragSpeed);
-        }
-        else
-        {
-            position = Vector3.zero;
+            Vector3 position = Vector3.zero;
 
-            if ((Input.GetKey("w") || Input.mousePosition.y >= Screen.height - _panBorderThickness) && transform.position.z < _zPanLimit)
+            if (Input.GetMouseButtonUp(2))
             {
-                position.z +=  _panSpeed;
+                _isDragging = false;
             }
 
-            if ((Input.GetKey("s") || Input.mousePosition.y <= _panBorderThickness) && transform.position.z > -_zPanLimit)
+            if (Input.GetMouseButtonDown(2))
             {
-                position.z -= _panSpeed;
+                _dragOrigin = Input.mousePosition;
+                _isDragging = true;
+                return;
             }
-
-            if ((Input.GetKey("d") || Input.mousePosition.x >= Screen.width - _panBorderThickness) && transform.position.x < _xPanLimit)
+            else if (_isDragging)
             {
-                position.x += _panSpeed;             
-            }
+                Vector3 mousePositionWithDragOffset = Camera.main.ScreenToViewportPoint(Input.mousePosition - _dragOrigin);
 
-            if ((Input.GetKey("a") || Input.mousePosition.x <= _panBorderThickness) && transform.position.x > -_xPanLimit)
-            {
-                position.x -= _panSpeed;                
-            }
-
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-            if(scroll != 0)
-            {
-                if (scroll > 0 && transform.position.y > _minY)
+                //Moving right
+                if (mousePositionWithDragOffset.x < 0 && transform.position.x < _xPanLimit)
                 {
-                    _scrollPosition = transform.position.y - (scroll * _scrollSpeed);
-                    position.y = Mathf.Lerp(position.y, _scrollPosition, 0.05f);
+                    position.x = -mousePositionWithDragOffset.x * _dragSpeed;
                 }
-                else if(scroll < 0 && transform.position.y < _maxY)
+
+                //Moving left
+                if (mousePositionWithDragOffset.x > 0 && transform.position.x > -_xPanLimit)
                 {
-                    _scrollPosition = transform.position.y - (scroll * _scrollSpeed);
-                    position.y = Mathf.Lerp(position.y, _scrollPosition, 0.05f);
+                    position.x = -mousePositionWithDragOffset.x * _dragSpeed;
+                }
+
+                if (mousePositionWithDragOffset.y < 0 && transform.position.z < _zPanLimit)
+                {
+                    position.z = -mousePositionWithDragOffset.y * _dragSpeed;
+                }
+
+                if (mousePositionWithDragOffset.y > 0 && transform.position.z > -_zPanLimit)
+                {
+                    position.z = -mousePositionWithDragOffset.y * _dragSpeed;
                 }
             }
-        }
+            else
+            {
+                position = Vector3.zero;
 
-        transform.Translate(position * Time.deltaTime, Space.World);
+                if ((Input.GetKey("w") || Input.mousePosition.y >= Screen.height - _panBorderThickness) && transform.position.z < _zPanLimit)
+                {
+                    position.z += _panSpeed;
+                }
+
+                if ((Input.GetKey("s") || Input.mousePosition.y <= _panBorderThickness) && transform.position.z > -_zPanLimit)
+                {
+                    position.z -= _panSpeed;
+                }
+
+                if ((Input.GetKey("d") || Input.mousePosition.x >= Screen.width - _panBorderThickness) && transform.position.x < _xPanLimit)
+                {
+                    position.x += _panSpeed;
+                }
+
+                if ((Input.GetKey("a") || Input.mousePosition.x <= _panBorderThickness) && transform.position.x > -_xPanLimit)
+                {
+                    position.x -= _panSpeed;
+                }
+
+                float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+                if (scroll != 0)
+                {
+                    if (scroll > 0 && transform.position.y > _minY)
+                    {
+                        _scrollPosition = transform.position.y - (scroll * _scrollSpeed);
+                        position.y = Mathf.Lerp(position.y, _scrollPosition, 0.05f);
+                    }
+                    else if (scroll < 0 && transform.position.y < _maxY)
+                    {
+                        _scrollPosition = transform.position.y - (scroll * _scrollSpeed);
+                        position.y = Mathf.Lerp(position.y, _scrollPosition, 0.05f);
+                    }
+                }
+            }
+
+            transform.Translate(position * Time.deltaTime, Space.World);
+        }
     }
 }

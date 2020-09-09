@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         //Reset Camera
-        if(Input.GetKey(KeyCode.R))
+        if(Input.GetKey(KeyCode.C))
         {
             transform.position = _initialPosition;
         }

@@ -7,6 +7,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.Environment
 {
+    public enum BuildingElementType
+    {
+        House = 0,
+        RoadStraight,
+        RoadCurve,
+        Cube
+    }
+
     public class BuildingElementFactory : MonoBehaviour
     {
         [SerializeField]

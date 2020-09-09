@@ -17,5 +17,10 @@ namespace Assets.Scripts.Environment
         {
             get => true;
         }
+
+        public override bool CanRotate
+        {
+            get => true;
+        }
     }
 }

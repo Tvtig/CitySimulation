@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Environment;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -33,6 +34,11 @@ public abstract class BuildingElement : MonoBehaviour
         get;
     }
 
+    public abstract bool CanRotate
+    {
+        get;
+    }
+
     public void Awake()
     {
         _groundManager = FindObjectOfType<GroundManager>();
@@ -40,6 +46,24 @@ public abstract class BuildingElement : MonoBehaviour
 
     private void Update()
     {
+        if(_isInContext && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Destroy(gameObject);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            _isInContext = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && _isInContext)
+        {
+            if (CanRotate)
+            {
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
+            }
+        }
+
         if (_isInContext)
         {
             MoveToMouse();

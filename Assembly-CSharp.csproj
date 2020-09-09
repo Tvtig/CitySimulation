@@ -55,17 +55,18 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Environment\BuildingElements\House.cs" />
+    <Compile Include="Assets\Scripts\Environment\BuildingElementFactory.cs" />
     <Compile Include="Assets\Scripts\SceneController.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Vehicle\AxleInfo.cs" />
     <Compile Include="Assets\Scripts\Environment\BuildingElement.cs" />
-    <Compile Include="Assets\Scripts\Environment\GroundManager.cs" />
-    <Compile Include="Assets\Scripts\Vehicle\DriverController.cs" />
+    <Compile Include="Assets\Scripts\Environment\BuildingElements\RoadStraight.cs" />
     <Compile Include="Assets\Scripts\UI\BuildingMenu.cs" />
-    <Compile Include="Assets\Scripts\Environment\BuildingElementType.cs" />
-    <Compile Include="Assets\Scripts\Environment\BuildingElementFactory.cs" />
-    <Compile Include="Assets\Scripts\Environment\BuildingElements\House.cs" />
+    <Compile Include="Assets\Scripts\Environment\GroundManager.cs" />
     <Compile Include="Assets\Scripts\Environment\BuildingElements\Cube.cs" />
+    <Compile Include="Assets\Scripts\Environment\BuildingElements\RoadCurve.cs" />
+    <Compile Include="Assets\Scripts\Vehicle\DriverController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
